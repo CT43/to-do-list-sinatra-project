@@ -21,6 +21,11 @@ class UsersController < ApplicationController
     end
   end
 
+  get '/logout' do
+    session.clear
+    redirect to "/login"
+  end
+
   post '/signup' do
     if params[:username].empty? || params[:email].empty? || params[:password].empty?
       redirect to '/signup'
