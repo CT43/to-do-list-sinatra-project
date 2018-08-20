@@ -30,7 +30,7 @@ class ListsController < ApplicationController
     erb :'lists/show_list'
   end
 
-  patch '/lists/:id' do
+  patch '/lists/:id/edit' do
     @list = List.find_by(id: params[:id])
     #binding.pry
     @completed_tasks = params[:list][:task_ids]
@@ -39,5 +39,9 @@ class ListsController < ApplicationController
       @task.destroy
     end
     redirect to "/lists/#{@list.id}"
+  end
+
+  delete '/lists/:id/delete' do
+
   end
 end
