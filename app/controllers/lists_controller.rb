@@ -12,16 +12,17 @@ class ListsController < ApplicationController
     @list = List.new(name: params[:name])
     @list.user_id = session[:user_id]
     @list.save
-    binding.pry
 
-    ##iterate over task[name] to create all isntance of tasks
+    ##iterate over task[name] to create all instances of tasks
     @tasks = params[:task][:name]
     @tasks.each do |task|
-      @task = Task.new(name: task)
-      @task.list_id = @list.id
-      @task.save
+      if !task == ""
+        @task = Task.new(name: task)
+        @task.list_id = @list.id
+        @task.save
+      end
     end
-    binding.pry
+
     redirect to '/show'
   end
 
