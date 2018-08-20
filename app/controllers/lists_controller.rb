@@ -29,4 +29,15 @@ class ListsController < ApplicationController
     @list = List.find_by(id: params[:id])
     erb :'lists/show_list'
   end
+
+  patch '/lists/:id' do
+    @list = List.find_by(id: params[:id])
+    #binding.pry
+    @completed_tasks = params[:list][:task_ids]
+    @completed_tasks.each do |task|
+      @task = Task.find_by(id: task)
+      @task.destroy
+    end
+    redirect to "/lists/#{@list.id}"
+  end
 end

@@ -1,3 +1,15 @@
+<form action="/lists/<%= @list.id %>" method="POST">
+  <input type="hidden" name="_method" value="patch">
+
+<h2><%= @list.name %></h2>
+
 <%@list.tasks.each do |task| %>
+
+    <input type="checkbox" name="list[task_ids][]" value="<%= task.id %>" id="<%= task.name %>"
     <p><%=task.name%></p>
 <% end %>
+
+
+<input type="submit" value="Submit">
+
+</form>
