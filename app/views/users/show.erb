@@ -5,7 +5,10 @@
 <% @user.lists.each do |list| %>
   <div>
     <a href="/lists/<%=list.id%>"><%= list.name %></a>
-    <a href="/lists/<%=list.id%>/delete"><i>delete</i></a><br> 
+    <form style="width:300px; display:inline-block;" action="/lists/<%=list.id%>/delete" method="POST">
+      <input type="hidden" name="_method" value="delete">
+      <input type="button" value="delete">
+    </form>
 
   </div>
 <% end %>
