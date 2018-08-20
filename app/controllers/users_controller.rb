@@ -13,6 +13,14 @@ class UsersController < ApplicationController
     erb :'/users/show'
   end
 
+  get '/login' do
+    if logged_in?
+      redirect to '/show'
+    else
+      erb :'/users/login'
+    end
+  end
+
   post '/signup' do
     if params[:username].empty? || params[:email].empty? || params[:password].empty?
       redirect to '/signup'
@@ -23,6 +31,8 @@ class UsersController < ApplicationController
       redirect to '/show'
     end
   end
+
+
 
 
 
