@@ -14,7 +14,6 @@ class ListsController < ApplicationController
     @list.save
 
     ##iterate over task[name] to create all instances of tasks
-    binding.pry
     @tasks = params[:task][:name]
     @tasks.reject { |c| c.empty? }
     @tasks.each do |task|

@@ -1,9 +1,12 @@
-<%= @user.username %>
+<h2><%= @user.username %></h2>
+<a href="/create_list">Create New List</a> <br>
+
+<h4>View or Edit Existing List</h4>
 <% @user.lists.each do |list| %>
   <div>
-    <a href="/lists/<%=list.id%>"><%= list.name %></a>
+    <a href="/lists/<%=list.id%>"><%= list.name %></a> <br>
 
   </div>
 <% end %>
-
+<br>
 <a href="/logout">LOGOUT</a>

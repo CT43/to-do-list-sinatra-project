@@ -2,7 +2,7 @@ class UsersController < ApplicationController
 
   get '/signup' do
     if logged_in?
-      redirect to '/show'
+      redirect to '/logout'
     else
       erb :'/users/create_user'
     end
@@ -23,7 +23,7 @@ class UsersController < ApplicationController
 
   get '/logout' do
     session.clear
-    redirect to "/login"
+    redirect to "/welcome"
   end
 
   post '/signup' do
