@@ -4,7 +4,8 @@
 <h4>View or Edit Existing List</h4>
 <% @user.lists.each do |list| %>
   <div>
-    <a href="/lists/<%=list.id%/edit>"><%= list.name %></a> <br>
+    <a href="/lists/<%=list.id%>"><%= list.name %></a>
+    <a href="/lists/<%=list.id%>/delete"><i>delete</i></a><br> 
 
   </div>
 <% end %>
