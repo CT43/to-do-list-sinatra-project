@@ -14,13 +14,13 @@ class ListsController < ApplicationController
     @list.save
 
     ##iterate over task[name] to create all instances of tasks
+    binding.pry
     @tasks = params[:task][:name]
+    @tasks.reject { |c| c.empty? }
     @tasks.each do |task|
-      if !task == ""
-        @task = Task.new(name: task)
-        @task.list_id = @list.id
-        @task.save
-      end
+      @task = Task.new(name: task)
+      @task.list_id = @list.id
+      @task.save
     end
 
     redirect to '/show'
