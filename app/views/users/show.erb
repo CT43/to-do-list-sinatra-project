@@ -1,16 +1,16 @@
 <h2><%= @user.username %></h2>
-<a href="/create_list">Create New List</a> <br>
+<a href="/create_list"><h6>Create New List</h6></a> <br>
 
-<h4>View or Edit Existing List</h4>
+<h4>View or Edit Existing List</h4> <br>
 <% @user.lists.each do |list| %>
   <div>
     <a href="/lists/<%=list.id%>"><%= list.name %></a>
     <form style="width:300px; display:inline-block;" action="/lists/<%=list.id%>/delete" method="POST">
       <input type="hidden" name="_method" value="delete">
-      <input type="button" value="delete">
+      <button type="delete" value="delete">delete</button>
     </form>
 
   </div>
 <% end %>
 <br>
-<a href="/logout">LOGOUT</a>
+<a href="/logout">logout</a>

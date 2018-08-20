@@ -9,13 +9,13 @@ class ListsController < ApplicationController
   end
 
   post '/list' do
-    @list = List.new(name: params[:name])
+    @list = List.new(name: params[:name].to_s)
     @list.user_id = session[:user_id]
     @list.save
 
     ##iterate over task[name] to create all instances of tasks
     @tasks = params[:task][:name]
-    @tasks.reject { |c| c.empty? }
+    @tasks = @tasks.reject { |c| c.empty? }
     @tasks.each do |task|
       @task = Task.new(name: task)
       @task.list_id = @list.id
@@ -44,7 +44,7 @@ class ListsController < ApplicationController
   delete '/lists/:id/delete' do
     if logged_in?
       @list = List.find_by(id: params[:id])
-      if @list && @list.user == current_user
+      if @list.user == current_user
         @list.delete
       end
         redirect to '/show'
