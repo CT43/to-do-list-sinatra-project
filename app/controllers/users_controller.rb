@@ -2,14 +2,14 @@ class UsersController < ApplicationController
 
   get '/signup' do
     if logged_in?
-      redirect to '/tweets'
+      redirect to '/show'
     else
       erb :'/users/create_user'
     end
   end
 
-  get '/users/:slug' do
-    @user = User.find_by(params[:slug])
+  get '/show' do
+    @user = User.find_by(id: session[:user_id])
     erb :'/users/show'
   end
 
@@ -20,7 +20,7 @@ class UsersController < ApplicationController
       @user = User.new(username: params[:username], email: params[:email], password: params[:password])
       @user.save
       session[:user_id] = @user.id
-      redirect to "/users/#{@user.slug}"
+      redirect to '/show'
     end
   end
 
