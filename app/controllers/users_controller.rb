@@ -29,11 +29,12 @@ class UsersController < ApplicationController
   post '/signup' do
     if params[:username].empty? || params[:email].empty? || params[:password].empty?
       redirect to '/signup'
-    # elsif User.all.each do |user|
-    #   if user.username == (params[:username])
-    #     redirect to '/signup'
-    #   end
-    # end
+    elsif User.all.each do |user|
+      if user.username == (params[:username]) || user.email == params[:email]
+        flash[:error] = "Username or Email already taken"
+        redirect to '/signup'
+      end
+    end
     else
       @user = User.new(username: params[:username], email: params[:email], password: params[:password])
       @user.save
