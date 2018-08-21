@@ -6,11 +6,9 @@
 <i>check off completed tasks</i> <br><br>
 
 <%@list.tasks.each do |task| %>
-
     <input type="checkbox" name="list[task_ids][]" value="<%= task.id %>"
     <p><a href="/task/<%=task.id%>/edit"><%=task.name%></a></p>
 <% end %>
-
 
 <input type="submit" value="Submit">
 <br></br>
