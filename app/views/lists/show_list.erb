@@ -4,8 +4,8 @@
 <h2><%= @list.name %></h2>
 
 <%@list.tasks.each do |task| %>
-
-    <input type="checkbox" name="list[task_ids][]" value="<%= task.id %>" id="<%= task.name %>"
+    <input type="text" name="task[name]" value="<%=task.name%>">
+    <input type="checkbox" name="list[task_ids][]" value="<%= task.id %>"
     <p><%=task.name%></p>
 <% end %>
 
