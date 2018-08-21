@@ -31,8 +31,23 @@ class ListsController < ApplicationController
   end
 
   get '/task/:id/edit' do
-    @task = Task.find_by(id params[:id])
+    @task = Task.find_by(id: params[:id])
     erb :'/lists/edit_list'
+  end
+
+  patch '/tasks/:id' do
+
+      @task = Task.find_by(id: params[:id])
+      if params[:name].empty?
+        redirect to "/tasks/#{@task.id}/edit"
+      else
+        if @task.user == current_user
+          @task.name = (params[:name])
+          @task.save
+          redirect to "/lists/#{@task.list_id}"
+        end
+      redirect to "/lists/#{@task.list_id}"
+    end
   end
 
   patch '/lists/:id/edit' do
