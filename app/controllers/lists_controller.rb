@@ -1,4 +1,7 @@
+require 'rack-flash'
+
 class ListsController < ApplicationController
+  use Rack::Flash
 
   get '/create_list' do
     if logged_in?
@@ -36,10 +39,10 @@ class ListsController < ApplicationController
   end
 
   patch '/tasks/:id' do
-
       @task = Task.find_by(id: params[:id])
       if params[:name].empty?
-        redirect to "/tasks/#{@task.id}/edit"
+        flash[:message] = "Task cannot be nameless, if you wish to delete the task, check it off in the list view"
+        redirect to "/task/#{@task.id}/edit"
       else
         if @task.user == current_user
           @task.name = (params[:name])
