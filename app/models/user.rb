@@ -2,7 +2,7 @@ class User < ActiveRecord::Base
   has_many :lists
   has_many :tasks, :through => :lists
   has_secure_password
-
+  #validates_uniqueness_of :username
 
   def slug
     username.downcase.gsub(" ","-")
