@@ -33,17 +33,17 @@ class UsersController < ApplicationController
     if params[:username].empty? || params[:email].empty? || params[:password].empty?
       flash[:message] = "Username, email, or password cannot be empty"
       redirect to '/signup'
-    elsif User.all.each do |user|
-      if user.username == (params[:username]) || user.email == params[:email]
-        flash[:message] = "Username or Email already taken"
-        redirect to '/signup'
+    else
+      User.all.each do |user|
+        if user.username == (params[:username]) || user.email == params[:email]
+          flash[:message] = "Username or Email already taken"
+          redirect to '/signup'
         end
-      else
-        @user = User.new(username: params[:username], email: params[:email], password: params[:password])
-        @user.save
-        session[:user_id] = @user.id
-        redirect to '/show'
       end
+      @user = User.new(username: params[:username], email: params[:email], password: params[:password])
+      @user.save
+      session[:user_id] = @user.id
+      redirect to '/show'
     end
   end
 
