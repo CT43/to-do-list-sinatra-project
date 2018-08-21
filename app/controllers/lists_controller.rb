@@ -30,6 +30,11 @@ class ListsController < ApplicationController
     erb :'lists/show_list'
   end
 
+  get '/task/:id/edit' do
+    @task = Task.find_by(id params[:id])
+    erb :'/lists/edit_list'
+  end
+
   patch '/lists/:id/edit' do
     @list = List.find_by(id: params[:id])
     #binding.pry
