@@ -5,7 +5,7 @@ class UsersController < ApplicationController
 
   get '/signup' do
     if logged_in?
-      redirect to '/logout'
+      redirect to '/show'
     else
       erb :'/users/create_user'
     end
