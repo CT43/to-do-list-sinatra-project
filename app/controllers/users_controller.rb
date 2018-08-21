@@ -1,4 +1,7 @@
+require 'rack-flash'
+
 class UsersController < ApplicationController
+  use Rack::Flash
 
   get '/signup' do
     if logged_in?
@@ -31,7 +34,7 @@ class UsersController < ApplicationController
       redirect to '/signup'
     elsif User.all.each do |user|
       if user.username == (params[:username]) || user.email == params[:email]
-        flash[:error] = "Username or Email already taken"
+        flash[:message] = "Username or Email already taken"
         redirect to '/signup'
       end
     end
