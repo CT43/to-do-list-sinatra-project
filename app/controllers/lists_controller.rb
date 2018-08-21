@@ -56,10 +56,12 @@ class ListsController < ApplicationController
   patch '/lists/:id/edit' do
     @list = List.find_by(id: params[:id])
     #binding.pry
-    @completed_tasks = params[:list][:task_ids]
-    @completed_tasks.each do |task|
-      @task = Task.find_by(id: task)
-      @task.destroy
+    if @list.user == current_user
+      @completed_tasks = params[:list][:task_ids]
+      @completed_tasks.each do |task|
+        @task = Task.find_by(id: task)
+        @task.destroy
+      end
     end
     redirect to "/lists/#{@list.id}"
   end
