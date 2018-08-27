@@ -34,6 +34,7 @@ class UsersController < ApplicationController
       flash[:message] = "Username, email, or password cannot be empty"
       redirect to '/signup'
     else
+      # User.find_by(username: fsfsd) || ...
       User.all.each do |user|
         if user.username == (params[:username]) || user.email == params[:email]
           flash[:message] = "Username or Email already taken"

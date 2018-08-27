@@ -4,11 +4,8 @@ class ListsController < ApplicationController
   use Rack::Flash
 
   get '/create_list' do
-    if logged_in?
-      erb :'/lists/create_list'
-    else
-      redirect to '/login'
-    end
+    redirect_if_not_logged_in
+    erb :'/lists/create_list'
   end
 
   post '/list' do
@@ -67,14 +64,11 @@ class ListsController < ApplicationController
   end
 
   delete '/lists/:id/delete' do
-    if logged_in?
-      @list = List.find_by(id: params[:id])
-      if @list.user == current_user
-        @list.delete
-      end
-        redirect to '/show'
-    else
-      redirect to '/login'
+    redirect_if_not_logged_in
+    @list = List.find_by(id: params[:id])
+    if @list.user == current_user
+      @list.delete
     end
+      redirect to '/show'
   end
 end
